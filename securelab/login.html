@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureLab — Iniciar sesión</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <div class="auth-bg"></div>
+
+    <div class="auth-wrapper">
+        <!-- Panel izquierdo -->
+        <div class="auth-left">
+            <a href="index.html" class="brand">
+                <span class="hex-icon">⬡</span>
+                Secure<strong>Lab</strong>
+            </a>
+            <div class="auth-left-content">
+                <h2>Plataforma de<br>gestión de incidentes</h2>
+                <p>Accede a tu panel de control y gestiona todos tus tickets de soporte desde un único lugar.</p>
+                <div class="feature-pill">🛡️ Conexión cifrada TLS 1.3</div>
+                <div class="feature-pill">🔐 Autenticación segura</div>
+                <div class="feature-pill">📋 Gestión de tickets</div>
+            </div>
+        </div>
+
+        <!-- Panel derecho: formulario -->
+        <div class="auth-right">
+            <div class="auth-card">
+                <h1>Bienvenido de nuevo</h1>
+                <p class="auth-subtitle">Introduce tus credenciales para continuar</p>
+
+                <!-- Mensajes de error -->
+                <div id="errorMsg" class="error-msg" style="display:none"></div>
+
+                <form action="php/login.php" method="POST" id="loginForm">
+                    <div class="form-group">
+                        <label>Correo electrónico</label>
+                        <input type="email" name="email" placeholder="usuario@empresa.com" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <div class="input-wrapper">
+                            <input type="password" name="password" id="passwordInput" placeholder="••••••••" required autocomplete="current-password">
+                            <button type="button" class="toggle-pass" onclick="togglePass()">👁</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">Iniciar sesión</button>
+                </form>
+
+                <p class="auth-switch">
+                    ¿No tienes cuenta? <a href="register.html">Regístrate gratis</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar errores desde URL
+        const params = new URLSearchParams(window.location.search);
+        const err = params.get('error');
+        const msgs = {
+            credenciales: 'Email o contraseña incorrectos.',
+            campos_vacios: 'Por favor, rellena todos los campos.'
+        };
+        if (err && msgs[err]) {
+            const el = document.getElementById('errorMsg');
+            el.textContent = '⚠️ ' + msgs[err];
+            el.style.display = 'block';
+        }
+
+        function togglePass() {
+            const inp = document.getElementById('passwordInput');
+            inp.type = inp.type === 'password' ? 'text' : 'password';
+        }
+    </script>
+</body>
+</html>
