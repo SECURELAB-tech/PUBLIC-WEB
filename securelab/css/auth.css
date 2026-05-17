@@ -1,0 +1,237 @@
+/* ============================================================
+   SecureLab — auth.css  (login.html / register.html)
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --bg:       #07090f;
+    --surface:  #0d1117;
+    --border:   rgba(0, 245, 196, 0.15);
+    --accent:   #00f5c4;
+    --accent2:  #0ea5e9;
+    --text:     #cdd6f4;
+    --muted:    #6e7a96;
+    --error:    #f87171;
+    --font-mono: 'Share Tech Mono', monospace;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Fondo decorativo */
+.auth-bg {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 60% 50% at 20% 60%, rgba(0,245,196,.06) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 80% 30%, rgba(14,165,233,.06) 0%, transparent 60%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ─── LAYOUT ─────────────────────────────────────────────── */
+.auth-wrapper {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* ─── PANEL IZQUIERDO ────────────────────────────────────── */
+.auth-left {
+    background: linear-gradient(160deg, #0d1117 0%, #07090f 100%);
+    border-right: 1px solid var(--border);
+    padding: 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Patrón de fondo decorativo */
+.auth-left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: .4;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-family: var(--font-head);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+}
+.brand strong { color: var(--accent); }
+.hex-icon { color: var(--accent); font-size: 1.4rem; }
+
+.auth-left-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.auth-left-content h2 {
+    font-family: var(--font-head);
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+}
+.auth-left-content p {
+    color: var(--muted);
+    font-size: .95rem;
+    line-height: 1.6;
+}
+.feature-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: rgba(0,245,196,.05);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: .5rem 1rem;
+    font-size: .85rem;
+    color: var(--accent);
+    width: fit-content;
+}
+
+/* ─── PANEL DERECHO ──────────────────────────────────────── */
+.auth-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    animation: fadeUp .6s ease forwards;
+}
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.auth-card h1 {
+    font-family: var(--font-head);
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: .4rem;
+}
+.auth-subtitle {
+    color: var(--muted);
+    font-size: .9rem;
+    margin-bottom: 2rem;
+}
+
+/* ─── FORMULARIO ─────────────────────────────────────────── */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+.form-group label {
+    display: block;
+    font-size: .82rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: .45rem;
+}
+.form-group input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 8px;
+    padding: .75rem 1rem;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: .95rem;
+    outline: none;
+    transition: border-color .2s;
+}
+.form-group input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0,245,196,.1);
+}
+.form-group input::placeholder { color: var(--muted); }
+
+.input-wrapper { position: relative; }
+.input-wrapper input { padding-right: 3rem; }
+.toggle-pass {
+    position: absolute;
+    right: .75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    opacity: .6;
+    transition: opacity .2s;
+}
+.toggle-pass:hover { opacity: 1; }
+
+.btn-submit {
+    width: 100%;
+    padding: .85rem;
+    background: var(--accent);
+    color: #07090f;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: .5rem;
+    transition: opacity .2s, transform .2s;
+}
+.btn-submit:hover { opacity: .88; transform: translateY(-1px); }
+
+.auth-switch {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: .88rem;
+    color: var(--muted);
+}
+.auth-switch a { color: var(--accent); text-decoration: none; font-weight: 500; }
+.auth-switch a:hover { text-decoration: underline; }
+
+/* Error */
+.error-msg {
+    background: rgba(248, 113, 113, .1);
+    border: 1px solid rgba(248, 113, 113, .3);
+    color: var(--error);
+    border-radius: 8px;
+    padding: .75rem 1rem;
+    font-size: .88rem;
+    margin-bottom: 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .auth-wrapper { grid-template-columns: 1fr; }
+    .auth-left { display: none; }
+}
