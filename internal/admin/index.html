@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CorpNet — Panel Administración</title>
+  <link rel="stylesheet" href="/internal/style.css">
+</head>
+<body>
+<div class="app">
+ 
+  <aside class="sidebar">
+    <div class="sidebar-logo">Corp<span>Net</span></div>
+ 
+    <div class="sidebar-section">Administración</div>
+    <a class="nav-link active" href="/internal/admin/">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      Inicio
+    </a>
+    <a class="nav-link" href="/internal/admin/employees.html">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      Empleados
+    </a>
+    <a class="nav-link" href="/internal/admin/documents.html">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      Documentos
+    </a>
+ 
+    <div class="sidebar-bottom">
+      <div class="user-chip">
+        <div class="avatar" id="avatar">--</div>
+        <div class="user-info">
+          <div class="user-name" id="fullName">Cargando...</div>
+          <div class="user-role" style="color:var(--accent);">Administrador</div>
+        </div>
+      </div>
+      <a class="nav-link" style="margin-top:4px;" onclick="logout()">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        Cerrar sesión
+      </a>
+    </div>
+  </aside>
+ 
+  <main class="main">
+    <div class="page-header">
+      <div class="page-title">Panel de Administración</div>
+      <div class="page-sub">Vista general del sistema</div>
+    </div>
+ 
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total empleados</div>
+        <div class="stat-value accent" id="statUsers">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Documentos subidos</div>
+        <div class="stat-value" id="statDocs">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Administradores</div>
+        <div class="stat-value" id="statAdmins">—</div>
+      </div>
+    </div>
+ 
+    <div class="card">
+      <div class="card-title">Accesos rápidos</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="/internal/admin/employees.html" class="btn btn-secondary">Ver empleados</a>
+        <a href="/internal/admin/documents.html" class="btn btn-secondary">Gestionar documentos</a>
+      </div>
+    </div>
+ 
+    <div class="card">
+      <div class="card-title">Últimos empleados registrados</div>
+      <table>
+        <thead>
+          <tr><th>Nombre</th><th>Email</th><th>Departamento</th><th>Rol</th></tr>
+        </thead>
+        <tbody id="recentUsers">
+          <tr><td colspan="4" class="text-muted">Cargando...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+ 
+<script>
+async function init() {
+  const res  = await fetch('/internal/api/session.php');
+  const user = await res.json();
+ 
+  if (!user.authenticated || user.role !== 'administrator') {
+    window.location.href = '/internal/login.html';
+    return;
+  }
+ 
+  const initials = user.full_name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+  document.getElementById('avatar').textContent   = initials;
+  document.getElementById('fullName').textContent = user.full_name;
+ 
+  const eRes   = await fetch('/internal/api/employees.php');
+  const employees = await eRes.json();
+  document.getElementById('statUsers').textContent  = employees.length;
+  document.getElementById('statAdmins').textContent = employees.filter(e => e.role === 'administrator').length;
+ 
+  const dRes  = await fetch('/internal/api/documents.php');
+  const docs  = await dRes.json();
+  document.getElementById('statDocs').textContent = docs.length;
+ 
+  const tbody = document.getElementById('recentUsers');
+  tbody.innerHTML = employees.slice(0,5).map(e => `
+    <tr>
+      <td>${e.full_name}</td>
+      <td class="text-muted">${e.email}</td>
+      <td>${e.department}</td>
+      <td><span class="badge ${e.role === 'administrator' ? 'badge-admin' : 'badge-emp'}">${e.role}</span></td>
+    </tr>
+  `).join('');
+}
+ 
+async function logout() {
+  await fetch('/internal/api/logout.php');
+  window.location.href = '/internal/login.html';
+}
+ 
+init();
+</script>
+</body>
+</html>
+ 

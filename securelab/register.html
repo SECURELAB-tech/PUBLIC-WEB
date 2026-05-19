@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureLab — Registrarse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <div class="auth-bg"></div>
+
+    <div class="auth-wrapper">
+        <!-- Panel izquierdo -->
+        <div class="auth-left">
+            <a href="index.html" class="brand">
+                <span class="hex-icon">⬡</span>
+                Secure<strong>Lab</strong>
+            </a>
+            <div class="auth-left-content">
+                <h2>Únete a la plataforma de seguridad</h2>
+                <p>Crea tu cuenta gratuita y empieza a gestionar tus incidentes de seguridad de forma profesional.</p>
+                <div class="feature-pill">🎫 Tickets ilimitados</div>
+                <div class="feature-pill">📎 Adjunta archivos y evidencias</div>
+                <div class="feature-pill">📊 Seguimiento en tiempo real</div>
+            </div>
+        </div>
+
+        <!-- Panel derecho: formulario -->
+        <div class="auth-right">
+            <div class="auth-card">
+                <h1>Crear una cuenta</h1>
+                <p class="auth-subtitle">Completa los datos para comenzar</p>
+
+                <div id="errorMsg" class="error-msg" style="display:none"></div>
+
+                <form action="php/register.php" method="POST" id="registerForm">
+                    <div class="form-group">
+                        <label>Nombre completo</label>
+                        <input type="text" name="nombre" placeholder="Ana García" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label>Correo electrónico</label>
+                        <input type="email" name="email" placeholder="usuario@empresa.com" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <div class="input-wrapper">
+                            <input type="password" name="password" id="passwordInput"
+                                   placeholder="Mínimo 6 caracteres" required minlength="6" autocomplete="new-password">
+                            <button type="button" class="toggle-pass" onclick="togglePass()">👁</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">Crear cuenta</button>
+                </form>
+
+                <p class="auth-switch">
+                    ¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const err = params.get('error');
+        const msgs = {
+            campos_vacios: 'Por favor, rellena todos los campos.',
+            email_existe:  'Este email ya está registrado. Prueba a iniciar sesión.',
+            password_corta:'La contraseña debe tener al menos 6 caracteres.'
+        };
+        if (err && msgs[err]) {
+            const el = document.getElementById('errorMsg');
+            el.textContent = '⚠️ ' + msgs[err];
+            el.style.display = 'block';
+        }
+
+        function togglePass() {
+            const inp = document.getElementById('passwordInput');
+            inp.type = inp.type === 'password' ? 'text' : 'password';
+        }
+    </script>
+</body>
+</html>

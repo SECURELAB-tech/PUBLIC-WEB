@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureLab — Plataforma de Ciberseguridad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+    <!-- Fondo animado de partículas -->
+    <canvas id="canvas"></canvas>
+
+    <!-- ===================== NAVBAR ===================== -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <div class="nav-brand">
+                <span class="hex-icon">⬡</span>
+                <span>Secure<strong>Lab</strong></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#soporte">Soporte</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="login.html" class="btn-outline">Iniciar sesión</a>
+                <a href="register.html" class="btn-solid">Registrarse</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero">
+        <div class="hero-badge">
+            <span class="dot"></span> Sistema activo — 99.9% uptime
+        </div>
+        <h1 class="hero-title">
+            Protegemos tu<br>
+            <span class="gradient-text">infraestructura</span><br>
+            digital.
+        </h1>
+        <p class="hero-desc">
+            SecureLab ofrece soluciones avanzadas de ciberseguridad para empresas.<br>
+            Monitorización en tiempo real, respuesta ante incidentes y soporte 24/7.
+        </p>
+        <div class="hero-cta">
+            <a href="register.html" class="btn-hero">Empezar ahora →</a>
+            <a href="#servicios" class="btn-ghost">Ver servicios</a>
+        </div>
+
+        <!-- Tarjeta flotante de stats -->
+        <div class="stats-bar">
+            <div class="stat">
+                <span class="stat-num">12K+</span>
+                <span class="stat-label">Clientes protegidos</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-num">98%</span>
+                <span class="stat-label">Amenazas bloqueadas</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-num">24/7</span>
+                <span class="stat-label">Soporte activo</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-num">< 2min</span>
+                <span class="stat-label">Tiempo de respuesta</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== SERVICIOS ===================== -->
+    <section class="servicios" id="servicios">
+        <div class="section-label">// SERVICIOS</div>
+        <h2 class="section-title">Todo lo que necesitas para estar <span class="accent">seguro</span></h2>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">🛡️</div>
+                <h3>Firewall Avanzado</h3>
+                <p>Protección perimetral con inspección profunda de paquetes y reglas dinámicas adaptativas.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔍</div>
+                <h3>Análisis de Vulnerabilidades</h3>
+                <p>Escaneo continuo de tu infraestructura para detectar y remediar brechas antes de que sean explotadas.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📡</div>
+                <h3>Monitorización SOC</h3>
+                <p>Centro de operaciones de seguridad activo 24/7 con alertas en tiempo real y respuesta inmediata.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔐</div>
+                <h3>Gestión de Identidad</h3>
+                <p>Control de accesos con MFA, SSO y políticas de privilegio mínimo para todos tus sistemas.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">☁️</div>
+                <h3>Seguridad Cloud</h3>
+                <p>Protección nativa para AWS, Azure y GCP con cumplimiento normativo (ISO 27001, ENS, GDPR).</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🧪</div>
+                <h3>Pentesting</h3>
+                <p>Equipo de red team certificado que simula ataques reales para evaluar tus defensas en profundidad.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== SOPORTE / TICKETS ===================== -->
+    <section class="soporte" id="soporte">
+        <div class="soporte-inner">
+            <div class="soporte-text">
+                <div class="section-label">// SOPORTE TÉCNICO</div>
+                <h2 class="section-title">¿Tienes un <span class="accent">incidente</span>?<br>Abre un ticket.</h2>
+                <p>
+                    Nuestro sistema de tickets permite reportar incidentes, adjuntar evidencias
+                    y hacer seguimiento en tiempo real. Respuesta garantizada en menos de 2 minutos.
+                </p>
+                <ul class="feature-list">
+                    <li>✅ Adjunta capturas, logs y documentos</li>
+                    <li>✅ Seguimiento del estado en tiempo real</li>
+                    <li>✅ Historial completo de comunicaciones</li>
+                    <li>✅ Priorización automática por severidad</li>
+                </ul>
+                <a href="login.html" class="btn-hero">Acceder al sistema de tickets →</a>
+            </div>
+            <div class="soporte-card">
+                <div class="ticket-preview">
+                    <div class="ticket-header">
+                        <span class="ticket-tag">TICKET #0042</span>
+                        <span class="ticket-status open">● Abierto</span>
+                    </div>
+                    <div class="ticket-title">Acceso no autorizado detectado</div>
+                    <div class="ticket-meta">
+                        <span>🕒 Hace 2 minutos</span>
+                        <span>👤 Ana García</span>
+                    </div>
+                    <div class="ticket-body">
+                        Se ha detectado un intento de acceso desde una IP externa no reconocida (185.220.x.x) al panel de administración...
+                    </div>
+                    <div class="ticket-attachment">
+                        <span>📎</span> captura_logs_servidor.png
+                    </div>
+                    <div class="ticket-footer">
+                        <a href="login.html" class="btn-ticket">Gestionar tickets</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== NOSOTROS ===================== -->
+    <section class="nosotros" id="nosotros">
+        <div class="section-label">// NOSOTROS</div>
+        <h2 class="section-title">Expertos que <span class="accent">duermen poco</span> para que tú duermas tranquilo.</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="avatar">MC</div>
+                <div class="team-name">María Castillo</div>
+                <div class="team-role">CEO & Founder</div>
+            </div>
+            <div class="team-card">
+                <div class="avatar">JL</div>
+                <div class="team-name">Jorge López</div>
+                <div class="team-role">Head of Red Team</div>
+            </div>
+            <div class="team-card">
+                <div class="avatar">SR</div>
+                <div class="team-name">Sofía Ruiz</div>
+                <div class="team-role">SOC Lead Analyst</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="hex-icon">⬡</span>
+                <span>Secure<strong>Lab</strong></span>
+            </div>
+            <p class="footer-copy">© 2025 SecureLab S.L. — Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <a href="#">Política de privacidad</a>
+                <a href="#">Términos de uso</a>
+                <a href="#">Contacto</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
